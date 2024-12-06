@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= post.title %></title>
+  <title>게시글 상세</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,74 +11,58 @@
       padding: 20px;
       background-color: #f4f4f4;
     }
+    h1 {
+      text-align: center;
+    }
     .post-container {
       background: white;
-      padding: 30px;
+      padding: 20px;
       margin: 50px auto;
       border-radius: 10px;
-      width: 60%;
+      width: 50%;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .post-title {
-      font-size: 30px;
-      color: #333;
-      margin-bottom: 10px;
-      border-bottom: 2px solid #007bff;
-      padding-bottom: 10px;
-    }
-    .post-date {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
     }
     .post-content {
+      margin-top: 20px;
       font-size: 18px;
-      line-height: 1.6;
+    }
+    .post-date {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+    .post-username {
+      font-size: 16px;
       color: #555;
-    }
-    .back-btn {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      display: inline-block;
-    }
-    .back-btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* 삭제 버튼 스타일 */
-    .delete-btn {
-      background-color: #ff4d4d;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
-      display: inline-block;
-    }
-
-    .delete-btn:hover {
-      background-color: #e60000;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+
   <div class="post-container">
-    <h1 class="post-title"><%= post.title %></h1>
-    <p class="post-date"><%= post.date %></p>
+    <h1>게시글 상세</h1>
+
+    <div class="post-title">
+      <%= post.title %>
+    </div>
+
     <div class="post-content">
       <%= post.content %>
     </div>
 
-    <!-- 삭제 버튼 추가 -->
-    <form action="/posts/<%= post.id %>/delete" method="POST">
-      <button type="submit" class="delete-btn">삭제</button>
-    </form>
+    <div class="post-date">
+      작성일: <%= post.date %>
+    </div>
 
-    <a href="/" class="back-btn">뒤로 가기</a>
+    <div class="post-username">
+      작성자: <%= post.username %>
+    </div>
   </div>
+
 </body>
 </html>
