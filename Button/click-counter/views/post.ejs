@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= post.title %></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .post-container {
+      background: white;
+      padding: 30px;
+      margin: 50px auto;
+      border-radius: 10px;
+      width: 60%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .post-title {
+      font-size: 30px;
+      color: #333;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #007bff;
+      padding-bottom: 10px;
+    }
+    .post-date {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+    .post-content {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .back-btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+    .back-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* 삭제 버튼 스타일 */
+    .delete-btn {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    .delete-btn:hover {
+      background-color: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <div class="post-container">
+    <h1 class="post-title"><%= post.title %></h1>
+    <p class="post-date"><%= post.date %></p>
+    <div class="post-content">
+      <%= post.content %>
+    </div>
+
+    <!-- 삭제 버튼 추가 -->
+    <form action="/posts/<%= post.id %>/delete" method="POST">
+      <button type="submit" class="delete-btn">삭제</button>
+    </form>
+
+    <a href="/" class="back-btn">뒤로 가기</a>
+  </div>
+</body>
+</html>
