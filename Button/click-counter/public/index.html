@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .board-container {
+      width: 60%;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .posts-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .post-item {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+    }
+    .post-item h3 {
+      margin: 0;
+      display: inline-block;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .post-item .created-at {
+      font-size: 14px;
+      color: #777;
+      margin-left: 10px;
+    }
+    .write-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>게시판</h1>
+
+  <div class="board-container">
+    <!-- 게시글 목록 -->
+    <ul id="posts-list" class="posts-list"></ul>
+  </div>
+
+  <!-- 글 작성 버튼 -->
+  <button class="write-button" onclick="location.href='/write'">글 작성</button>
+
+  <script>
+    // 게시글 목록 불러오기
+    async function loadPosts() {
+      try {
+        const response = await fetch('/posts');
+        const posts = await response.json();
+
+        posts.forEach(post => appendPost(post));
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // 게시글 추가 함수
+    function appendPost(post) {
+      const postItem = document.createElement('li');
+      postItem.classList.add('post-item');
+
+      // 제목 클릭 시 해당 게시글로 새 탭에서 열기
+      postItem.innerHTML = `
+        <h3 onclick="window.open('/posts/${post.id}', '_blank')">${post.title}</h3>
+        <span class="created-at">${post.createdAt}</span>
+      `;
+      
+      document.getElementById('posts-list').appendChild(postItem);
+    }
+
+    // 페이지 로딩 시 게시글 목록 불러오기
+    loadPosts();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 상세</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .post-container {
+      background: white;
+      padding: 20px;
+      margin: 50px auto;
+      border-radius: 10px;
+      width: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .post-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .post-content {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    .post-date {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+    .post-username {
+      font-size: 16px;
+      color: #555;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="post-container">
+    <h1>게시글 상세</h1>
+
+    <div class="post-title">
+      <%= post.title %>
+    </div>
+
+    <div class="post-content">
+      <%= post.content %>
+    </div>
+
+    <div class="post-date">
+      작성일: <%= post.date %>
+    </div>
+
+    <div class="post-username">
+      작성자: <%= post.username %>
+    </div>
+  </div>
+
+</body>
+</html>
