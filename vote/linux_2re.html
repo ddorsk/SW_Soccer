@@ -8,16 +8,35 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* 화면 높이만큼 차지 */
+            background-color: #f9f9f9;
+        }
+        .chart-container {
+            width: 400px; /* 차트 컨테이너 너비 */
+            height: 400px; /* 차트 컨테이너 높이 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
             padding: 20px;
         }
         canvas {
-            margin-top: 30px;
+            width: 100%; /* 캔버스가 컨테이너에 맞게 조정 */
+            height: auto; /* 비율 유지 */
         }
     </style>
 </head>
 <body>
-    <h1>Voting Results</h1>
-    <canvas id="resultChart" width="400" height="400"></canvas>
+    <div class="chart-container">
+        <canvas id="resultChart"></canvas>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="linux_re.js"></script>
 </body>

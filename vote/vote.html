@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #timer {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>팀에게 투표하세요!</h1>
+    <div id="timer">남은 시간: 30초</div>
+    <button id="voteHome">Home Team</button>
+    <button id="voteAway">Away Team</button>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const homeTeam = urlParams.get('home');
+        const awayTeam = urlParams.get('away');
+
+        document.getElementById('voteHome').textContent = `Vote for ${homeTeam}`;
+        document.getElementById('voteAway').textContent = `Vote for ${awayTeam}`;
+
+        let timeLeft = 30;
+        let votingAllowed = true;
+
+        const timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById('timer').textContent = `남은 시간: ${timeLeft}초`;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                alert('투표가 마감되었습니다.');
+                votingAllowed = false;
+                window.location.href = `linux_2re.html?home=${encodeURIComponent(
+                    homeTeam
+                )}&away=${encodeURIComponent(awayTeam)}`;
+            }
+        }, 1000);
+
+        document.getElementById('voteHome').onclick = () => {
+            if (!votingAllowed) return;
+            const votes = JSON.parse(localStorage.getItem('votes')) || {};
+            votes[homeTeam] = (votes[homeTeam] || 0) + 1;
+            localStorage.setItem('votes', JSON.stringify(votes));
+            alert(`${homeTeam}에 투표했습니다.`);
+        };
+
+        document.getElementById('voteAway').onclick = () => {
+            if (!votingAllowed) return;
+            const votes = JSON.parse(localStorage.getItem('votes')) || {};
+            votes[awayTeam] = (votes[awayTeam] || 0) + 1;
+            localStorage.setItem('votes', JSON.stringify(votes));
+            alert(`${awayTeam}에 투표했습니다.`);
+        };
+    </script>
+</body>
+</html>
