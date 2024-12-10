@@ -16,6 +16,10 @@
             font-size: 16px;
             cursor: pointer;
         }
+        button:disabled {
+            background-color: #ccc; /* 비활성화된 버튼 스타일 */
+            cursor: not-allowed;
+        }
         #timer {
             font-size: 18px;
             margin-bottom: 20px;
@@ -52,12 +56,19 @@
             }
         }, 1000);
 
+        const disableVoting = () => {
+            votingAllowed = false;
+            document.getElementById('voteHome').disabled = true;
+            document.getElementById('voteAway').disabled = true;
+        };
+
         document.getElementById('voteHome').onclick = () => {
             if (!votingAllowed) return;
             const votes = JSON.parse(localStorage.getItem('votes')) || {};
             votes[homeTeam] = (votes[homeTeam] || 0) + 1;
             localStorage.setItem('votes', JSON.stringify(votes));
             alert(`${homeTeam}에 투표했습니다.`);
+            disableVoting(); // 투표 완료 후 비활성화
         };
 
         document.getElementById('voteAway').onclick = () => {
@@ -66,6 +77,7 @@
             votes[awayTeam] = (votes[awayTeam] || 0) + 1;
             localStorage.setItem('votes', JSON.stringify(votes));
             alert(`${awayTeam}에 투표했습니다.`);
+            disableVoting(); // 투표 완료 후 비활성화
         };
     </script>
 </body>

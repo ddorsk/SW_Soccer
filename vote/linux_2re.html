@@ -11,6 +11,7 @@
             padding: 0;
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh; /* 화면 높이만큼 차지 */
@@ -26,16 +27,36 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             padding: 20px;
+            margin-bottom: 20px; /* 버튼과 차트 간격 */
         }
         canvas {
             width: 100%; /* 캔버스가 컨테이너에 맞게 조정 */
             height: auto; /* 비율 유지 */
+        }
+        .button-container {
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="chart-container">
         <canvas id="resultChart"></canvas>
+    </div>
+    <div class="button-container">
+        <button onclick="location.href='index.html'">프리미어리그 경기 일정 보기</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="linux_re.js"></script>
