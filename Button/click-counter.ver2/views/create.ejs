@@ -29,7 +29,7 @@
       font-size: 16px;
       color: #333;
     }
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       border-radius: 5px;
@@ -84,8 +84,37 @@
         <textarea id="content" name="content" rows="5" required></textarea>
       </div>
 
+      <!-- 팀 선택 -->
+      <div class="form-group">
+        <label for="team">팀</label>
+        <select id="team" name="team" required>
+          <% teams.forEach(team => { %>
+            <option value="<%= team %>"><%= team %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <!-- "기타" 선택 시, 팀 이름 입력 필드 표시 -->
+      <div class="form-group" id="other-team-group" style="display: none;">
+        <label for="otherTeam">기타 팀 이름</label>
+        <input type="text" id="otherTeam" name="otherTeam" placeholder="기타 팀 이름을 입력하세요" />
+      </div>
+
       <button type="submit">글 작성</button>
     </form>
   </div>
+
+  <script>
+    // 팀 선택이 "기타"일 경우, 기타 팀 이름 입력 필드 표시
+    const teamSelect = document.getElementById('team');
+    const otherTeamGroup = document.getElementById('other-team-group');
+    teamSelect.addEventListener('change', function() {
+      if (teamSelect.value === '기타') {
+        otherTeamGroup.style.display = 'block';
+      } else {
+        otherTeamGroup.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
