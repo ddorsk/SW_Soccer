@@ -1,2 +1,0 @@
-1,1,1,Male,Arsenal
-2,2,2,Female,Chelsea
