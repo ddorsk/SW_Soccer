@@ -1,27 +1,39 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = file_get_contents('php://input');
-    $data = json_decode($input, true);
+// JSON 데이터 수신
+$data = file_get_contents("php://input");
+$decodedData = json_decode($data, true);
 
-    if (isset($data['votes'])) {
-        $votes = $data['votes'];
-        $filePath = "C:/xampp/htdocs/VOTE/PL/ranking.txt";
+if ($decodedData) {
+    $votes = $decodedData['votes'] ?? [];
+    $filePath = 'ranking.txt';
 
-        // 내용 구성: 팀 이름, 투표 수 형식
-        $content = "";
-        foreach ($votes as $team => $count) {
-            $content .= "$team, $count\n";
+    // 기존 데이터 읽기
+    $existingData = [];
+    if (file_exists($filePath)) {
+        $fileContents = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        foreach ($fileContents as $line) {
+            list($team, $count) = explode(',', $line);
+            $existingData[trim($team)] = (int) trim($count);
         }
+    }
 
-        // 파일 쓰기
-        if (file_put_contents($filePath, $content) !== false) {
-            echo json_encode(["success" => true, "message" => "Votes saved successfully"]);
-        } else {
-            echo json_encode(["success" => false, "message" => "Failed to save votes"]);
-        }
+    // 새로운 데이터 병합
+    foreach ($votes as $team => $voteCount) {
+        $existingData[$team] = ($existingData[$team] ?? 0) + $voteCount;
+    }
+
+    // 파일에 데이터 저장
+    $fileContents = "";
+    foreach ($existingData as $team => $count) {
+        $fileContents .= "{$team}, {$count}\n";
+    }
+
+    if (file_put_contents($filePath, $fileContents)) {
+        echo json_encode(['success' => true, 'message' => '투표 데이터가 저장되었습니다.']);
     } else {
-        echo json_encode(["success" => false, "message" => "Invalid data format"]);
+        echo json_encode(['success' => false, 'message' => '파일 저장 실패']);
     }
 } else {
-    echo json_encode(["success" => false, "message" => "Invalid request method"]);
+    echo json_encode(['success' => false, 'message' => '유효하지 않은 데이터']);
 }
+?>

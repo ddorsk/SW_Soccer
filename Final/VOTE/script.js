@@ -33,14 +33,14 @@ const timer = setInterval(() => {
     }
 }, 1000);
 
-// 모든 팀의 투표 데이터를 저장하는 함수
+// 모든 팀의 투표 데이터를 서버로 저장하는 함수
 async function updateAllVotesFile() {
     try {
         const votes = JSON.parse(localStorage.getItem('votes')) || {};
         const response = await fetch('/VOTE/PL/save_vote.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ votes }),
+            body: JSON.stringify({ votes }), // 데이터를 서버로 전송
         });
 
         const result = await response.json();
@@ -59,12 +59,12 @@ function handleVote(teamName, elementId) {
     if (!votingAllowed) return;
 
     const votes = JSON.parse(localStorage.getItem('votes')) || {};
-    votes[teamName] = (votes[teamName] || 0) + 1;
-    localStorage.setItem('votes', JSON.stringify(votes));
+    votes[teamName] = (votes[teamName] || 0) + 1; // 해당 팀의 투표 수 증가
+    localStorage.setItem('votes', JSON.stringify(votes)); // 로컬 스토리지에 저장
 
     alert(`${teamName}에 투표했습니다.`);
-    updateAllVotesFile(); // 모든 팀의 데이터를 저장
-    disableVoting();
+    updateAllVotesFile(); // 서버로 데이터 저장 요청
+    disableVoting(); // 투표 비활성화
 }
 
 // 홈 팀 투표 버튼
@@ -80,6 +80,12 @@ document.getElementById('voteAwayButton')?.addEventListener('click', () => {
 // 투표 비활성화 함수
 function disableVoting() {
     votingAllowed = false;
-    document.getElementById('voteHomeButton').disabled = true;
-    document.getElementById('voteAwayButton').disabled = true;
+    document.getElementById('voteHomeButton')?.setAttribute('disabled', true);
+    document.getElementById('voteAwayButton')?.setAttribute('disabled', true);
 }
+
+// 페이지가 로드될 때 기존 투표 데이터 복원
+window.addEventListener('DOMContentLoaded', () => {
+    const votes = JSON.parse(localStorage.getItem('votes')) || {};
+    console.log('현재 투표 데이터:', votes);
+});
