@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 작성</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      margin: 50px auto;
+      border-radius: 10px;
+      width: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      font-size: 16px;
+      color: #333;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      border: none;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .error-message {
+      color: red;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>새 게시글 작성</h1>
+
+    <!-- 로그인 실패 시 오류 메시지 -->
+    <% if (errorMessage) { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+
+    <form action="/create" method="POST">
+      <!-- 로그인 정보 입력 -->
+      <div class="form-group">
+        <label for="username">아이디</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <!-- 게시글 제목과 내용 입력 -->
+      <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" required />
+      </div>
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+      </div>
+
+      <!-- 팀 선택 -->
+      <div class="form-group">
+        <label for="team">팀</label>
+        <select id="team" name="team" required>
+          <% teams.forEach(team => { %>
+            <option value="<%= team %>"><%= team %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <!-- "기타" 선택 시, 팀 이름 입력 필드 표시 -->
+      <div class="form-group" id="other-team-group" style="display: none;">
+        <label for="otherTeam">기타 팀 이름</label>
+        <input type="text" id="otherTeam" name="otherTeam" placeholder="기타 팀 이름을 입력하세요" />
+      </div>
+
+      <button type="submit">글 작성</button>
+    </form>
+  </div>
+
+  <script>
+    // 팀 선택이 "기타"일 경우, 기타 팀 이름 입력 필드 표시
+    const teamSelect = document.getElementById('team');
+    const otherTeamGroup = document.getElementById('other-team-group');
+    teamSelect.addEventListener('change', function() {
+      if (teamSelect.value === '기타') {
+        otherTeamGroup.style.display = 'block';
+      } else {
+        otherTeamGroup.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시판</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    .team-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .team-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .team-button:hover {
+      background-color: #0056b3;
+    }
+
+    .post {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+      padding: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .post-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+      text-decoration: none;
+      width: 50%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .post-title:hover {
+      color: #007bff;
+    }
+
+    .post-username {
+      font-size: 14px;
+      color: #555;
+      width: 20%;
+      text-align: left;
+    }
+
+    .post-date {
+      font-size: 14px;
+      color: #888;
+      text-align: right;
+      width: 30%;
+    }
+
+    .post-team {
+      font-size: 14px;
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    #post-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .create-post-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 15px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+
+    .create-post-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>게시판</h1>
+
+  <!-- 팀 선택 버튼들 -->
+  <div class="team-buttons">
+    <a href="/all"><button class="team-button">전체</button></a>
+    <a href="/team/맨시티"><button class="team-button">맨시티</button></a>
+    <a href="/team/맨유"><button class="team-button">맨유</button></a>
+    <a href="/team/토트넘"><button class="team-button">토트넘</button></a>
+    <a href="/team/아스날"><button class="team-button">아스날</button></a>
+    <a href="/team/첼시"><button class="team-button">첼시</button></a>
+    <a href="/team/리버풀"><button class="team-button">리버풀</button></a>
+    <a href="/other"><button class="team-button">기타</button></a>
+  </div>
+
+  <div id="post-list">
+    <% posts.forEach(post => { %>
+      <div class="post">
+        <a href="/posts/<%= post.id %>" class="post-title"><%= post.title %></a>
+        <div class="post-username">작성자: <%= post.username %></div>
+        <div class="post-date"><%= post.date %></div>
+        <div class="post-team">팀: <%= post.team %></div> <!-- 팀 정보 추가 -->
+      </div>
+    <% }) %>
+  </div>
+
+  <a href="/create" target="_blank">
+    <button class="create-post-btn">글 작성</button>
+  </a>
+
+</body>
+</html>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #4caf50, #2196f3);
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        #voteHome, #voteAway {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff9800;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e65100;
+        }
+
+        button:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+
+        #timer {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>팀 투표</h1>
+
+    <!-- 홈 팀 및 버튼 -->
+    <div id="voteHome">Vote for Home Team</div>
+    <button id="voteHomeButton">Vote for Home</button>
+
+    <!-- 어웨이 팀 및 버튼 -->
+    <div id="voteAway">Vote for Away Team</div>
+    <button id="voteAwayButton">Vote for Away</button>
+
+    <!-- 타이머 -->
+    <p id="timer">남은 시간: 30초</p>
+
+    <script src="script.js"></script>
+</body>
+</html>

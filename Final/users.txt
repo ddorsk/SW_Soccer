@@ -1,0 +1,17 @@
+1,$2y$10$l9FNP6B.TRz62AtDJUGy8eXMazsMpkZkqcE6Fr7bTSLbOC.T7ghDG,20,Male,Manchester City
+2,$2y$10$ZoD2MX1l2W.a1xdRhn1G8uJYiC1Smwga0QWziUl8fvHoN0eebQpp.,20,Female,Arsenal
+1,1,1,Male,Chelsea
+3,3,30,Male,Manchester City
+test,test,20,Male,Arsenal
+kjw,kjw,20,Male,Arsenal
+2222,2222,20,Male,Arsenal
+9999,9999,20,Male,Chelsea
+8888,8888,23,Male,Chelsea
+0000,0000,20,Male,Manchester United
+1234,1234,20,Male,Manchester United
+sw,sw,20,Male,Tottenham Hotspur
+hyunbeen,1234,90,Other,Manchester City
+Qwer,qwer,20,Male,Liverpool
+Qwerqwer,qwer,20,Other,Manchester United
+김,12,20,Male,Tottenham Hotspur
+이석희,1234,20,Male,Arsenal
